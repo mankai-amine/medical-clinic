@@ -1,0 +1,6 @@
+Steven,Hewitt,1970,06,10,MALE,lmn@gmail.com,111111,DC001,Family medicine
+Stephanie,White,1955,11,09,FEMALE,mno@gmail.com,222222,DC002,Family medicine
+Marjorie,Davies,1969,10,18,FEMALE,nop@gmail.com,333333,DC003,Pediatrics
+Bobby,Miller,1980,02,28,MALE,opq@gmail.com,444444,DC004,Gynecology
+
+

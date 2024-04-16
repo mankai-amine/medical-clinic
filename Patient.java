@@ -2,7 +2,7 @@ class Patient extends Person{
     private String insuranceCompany;
     private String patientID;
 
-    // Constructor
+    // Constructor with parameters
     public Patient(String firstName, String lastName, int yearOfBirth,int monthOfBirth, int dayOfBirth, Gender gender, String email, int phone, String patientID, String insuranceCompany) {
         super(firstName, lastName, yearOfBirth, monthOfBirth, dayOfBirth, gender, email, phone);
         setInsuranceCompany(insuranceCompany);
