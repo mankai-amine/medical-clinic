@@ -1,5 +1,5 @@
-John,Collins,1980,07,20,MALE,abc@gmail.com,123456,PT001,Manu life
-Michael,Smith,1965,10,03,MALE,cde@gmail.com,234567,PT002,Sun Life
-Sylvia,Brown,1999,09,14,FEMALE,efg@gmail.com,345678,PT003,Great-West Life
-Marie,Dupont,1978,01,31,FEMALE,gij@gmail.com,456789,PT004,Desjardins
-Walter,Curtis,2000,08,28,MALE,jkl@gmail.com,567891,PT005,Industrial Alliance
+John,Collins,1980-07-20,MALE,abc@gmail.com,123456,PT001,Manu life
+Michael,Smith,1965-10-03,MALE,cde@gmail.com,234567,PT002,Sun Life
+Sylvia,Brown,1999-09-14,FEMALE,efg@gmail.com,345678,PT003,Great-West Life
+Marie,Dupont,1978-01-31,FEMALE,gij@gmail.com,456789,PT004,Desjardins
+Walter,Curtis,2000-08-28,MALE,jkl@gmail.com,567891,PT005,Industrial Alliance
