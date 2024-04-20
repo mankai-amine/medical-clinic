@@ -10,7 +10,7 @@ public class Treatment {
     private String patientID; 
      
     // constructor with parameters
-    public Treatment(String treatmentID, String prescription,LocalDate date, String doctorID, String patientID){
+    public Treatment(String treatmentID, String doctorID, String patientID, LocalDate date, String prescription){
         setTreatmentID (treatmentID);
         setPrescription(prescription);
         setDate(date);
@@ -64,9 +64,9 @@ public class Treatment {
     @Override
     public String toString(){
         return "treatment ID= " + treatmentID + '\'' +
-        "prescription= " + prescription + '\'' +
-        "date= " + date + '\'' +
         "doctorID= " + doctorID + '\'' +
-        "patientID= " + patientID + '\'' ;
+        "patientID= " + patientID + '\''+
+        "date= " + date + '\'' +
+        "prescription= " + prescription + '\'';
     }
 }

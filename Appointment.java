@@ -1,16 +1,16 @@
-import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
  
 public class Appointment {
      
      private String appointmentID; 
      private LocalDate date;
-     private Time time;
+     private LocalTime time;
      private String doctorID;
      private String patientID; 
      
      // constructor with parameters
-     public Appointment(String appointment, LocalDate date, Time time, String doctorID, String patientID){
+     public Appointment(String appointment, String doctorID, String patientID, LocalDate date, LocalTime time){
          setAppointmentID(appointment);
          setDate(date);
          setTime(time);
@@ -27,7 +27,7 @@ public class Appointment {
          this.date = date;
      }
 
-     public void setTime (Time time){
+     public void setTime (LocalTime time){
         this.time = time;
     }
  
@@ -48,7 +48,7 @@ public class Appointment {
          return this.date;
      }
 
-     public Time getTime(){
+     public LocalTime getTime(){
         return this.time;
     }
  
@@ -64,10 +64,10 @@ public class Appointment {
     @Override
     public String toString(){
         return "appointment ID= " + appointmentID + '\'' +
-        "date= " + date + '\'' +
-        "time= " + time + '\'' +
         "doctorID= " + doctorID + '\'' +
-        "patientID= " + patientID + '\'' ;
+        "patientID= " + patientID + '\'' +
+        "date= " + date + '\'' +
+        "time= " + time + '\'';
     }
      
  }
