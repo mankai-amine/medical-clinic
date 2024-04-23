@@ -8,14 +8,15 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class SystemManagement {
 
-    private static List<Doctor> doctors;
-    private static List<Patient> patients;
-    private static List<Appointment> appointments;
-    private static List<Treatment> treatments;
+    private static List<Doctor> doctors = new ArrayList<>();
+    private static List<Patient> patients = new ArrayList<>();
+    private static List<Appointment> appointments = new ArrayList<>();
+    private static List<Treatment> treatments = new ArrayList<>();
 
     private static final String doctorsFileName = "doctors.txt";
     private static final String patientsFileName = "patients.txt";
@@ -33,7 +34,6 @@ public class SystemManagement {
     // Load doctors
     public static void loadDoctors() throws FileNotFoundException{
         Scanner scanner = new Scanner(new FileReader(doctorsFileName) );
-        int i=0;
 
         while (scanner.hasNextLine()){
             String firstName,lastName, email , doctorID, specialty;
@@ -41,20 +41,28 @@ public class SystemManagement {
             Person.Gender gender;
 
             String line = scanner.nextLine();
-            String[] lineParts= line.split(",");
-            firstName = lineParts[0];
-            lastName = lineParts[1];
-            yearOfBirth = LocalDate.parse(lineParts[2]).getYear();
-            monthOfBirth = LocalDate.parse(lineParts[2]).getMonthValue();
-            dayOfBirth = LocalDate.parse(lineParts[2]).getDayOfMonth();
-            gender = Person.Gender.valueOf(lineParts[3]) ;
-            email= lineParts[4];
-            phone = Integer.parseInt(lineParts[5]) ;
-            doctorID = lineParts[6];
-            specialty = lineParts[7];
 
-            doctors.set(i, new Doctor(firstName, lastName, yearOfBirth, monthOfBirth, dayOfBirth, gender, email, phone, doctorID, specialty));
-            i++;
+            if (!line.isEmpty()){
+                String[] lineParts= line.split(",");
+                System.out.println(Arrays.toString(lineParts));
+                
+                firstName = lineParts[0];
+                lastName = lineParts[1];
+                yearOfBirth = LocalDate.parse(lineParts[2]).getYear();
+                monthOfBirth = LocalDate.parse(lineParts[2]).getMonthValue();
+                dayOfBirth = LocalDate.parse(lineParts[2]).getDayOfMonth();
+                gender = Person.Gender.valueOf(lineParts[3]) ;
+                email= lineParts[4];
+                phone = Integer.parseInt(lineParts[5]) ;
+                doctorID = lineParts[6];
+                specialty = lineParts[7];
+    
+                Doctor doctor = new Doctor(firstName, lastName, yearOfBirth, monthOfBirth, dayOfBirth, gender, email, phone, doctorID, specialty);
+                doctors.add(doctor);
+            } else {
+                break;
+            }
+            
         }
 
         scanner.close();
@@ -63,7 +71,6 @@ public class SystemManagement {
     // Load patients
     public static void loadPatients() throws FileNotFoundException{
         Scanner scanner = new Scanner(new FileReader(patientsFileName) );
-        int i=0;
 
         while (scanner.hasNextLine()){
             String firstName,lastName, email , patientID, insuranceCompany;
@@ -83,8 +90,8 @@ public class SystemManagement {
             patientID = lineParts[6];
             insuranceCompany = lineParts[7];
 
-            patients.set(i, new Patient(firstName, lastName, yearOfBirth, monthOfBirth, dayOfBirth, gender, email, phone, patientID, insuranceCompany));
-            i++;
+            Patient patient = new Patient (firstName, lastName, yearOfBirth, monthOfBirth, dayOfBirth, gender, email, phone, patientID, insuranceCompany);
+            patients.add(patient);
         }
 
         scanner.close();
@@ -93,7 +100,6 @@ public class SystemManagement {
     // Load appointments
     public static void loadAppointments() throws FileNotFoundException, ParseException{
         Scanner scanner = new Scanner(new FileReader(appointmentsFileName) );
-        int i=0;
 
         while (scanner.hasNextLine()){
             String appointmentID, doctorID, patientID;
@@ -108,8 +114,8 @@ public class SystemManagement {
             date = LocalDate.parse(lineParts[3]);
             time = LocalTime.parse(lineParts[4])  ;
 
-            appointments.set(i, new Appointment(appointmentID, doctorID, patientID, date, time));
-            i++;
+            Appointment appointment = new Appointment (appointmentID, doctorID, patientID, date, time);
+            appointments.add(appointment);
         }
 
         scanner.close();
@@ -118,7 +124,6 @@ public class SystemManagement {
     // Load treatments
     public static void loadTreatments() throws FileNotFoundException, ParseException{
         Scanner scanner = new Scanner(new FileReader(treatmentsFileName) );
-        int i=0;
 
         while (scanner.hasNextLine()){
             String treatmentID, doctorID, patientID, prescription;
@@ -132,8 +137,8 @@ public class SystemManagement {
             date = LocalDate.parse(lineParts[3]);
             prescription = lineParts[4];
 
-            treatments.set(i, new Treatment(treatmentID, doctorID, patientID, date, prescription));
-            i++;
+            Treatment treatment = new Treatment (treatmentID, doctorID, patientID, date, prescription);
+            treatments.add(treatment);
         }
 
         scanner.close();
@@ -157,33 +162,37 @@ public class SystemManagement {
     }
 
     // get the list of treatments for one particular patient 
-    public List<Treatment> getMedicalHistory(String patientID){
-        List<Treatment> medicalHistory = new ArrayList<>();
+    public static String viewMedicalHistory(String patientID){
+        //List<Treatment> medicalHistory = new ArrayList<>();
+        String str = "";
         
         for (Treatment treatment : treatments ){
             // find the treatments that correspond to that particular patient
             if (treatment.getPatientID().equals(patientID)){
                 // add the treatment to the patient's medical history
-                medicalHistory.add(treatment);
+                //medicalHistory.add(treatment);
+                str += treatment.toString();
             }
         }
         
-        return medicalHistory;
+        return str;
     }
 
     // get the list of appointments for one particular patient
-    public List<Appointment> getAppointmentsHistory(String patientID){
-        List<Appointment> appointmentsHistory = new ArrayList<>();
+    public static String viewAppointmentsList(String patientID){
+        //List<Appointment> appointmentsHistory = new ArrayList<>();
+        String str = "";
         
         for (Appointment appointment : appointments ){
             // find the appointments that correspond to that particular patient
             if (appointment.getPatientID().equals(patientID)){
                 // add the appointment to the patient's appointments history
-                appointmentsHistory.add(appointment);
+                //appointmentsHistory.add(appointment);
+                str += appointment.toString() ;
             }
         }
         
-        return appointmentsHistory;
+        return str;
     }
 
     // get the list of appointments for one particular doctor
