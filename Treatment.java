@@ -63,10 +63,7 @@ public class Treatment {
     //toString
     @Override
     public String toString(){
-        return "treatment ID= " + treatmentID + '\'' +
-        "doctorID= " + doctorID + '\'' +
-        "patientID= " + patientID + '\''+
-        "date= " + date + '\'' +
-        "prescription= " + prescription + '\'';
+        return String.format("%-15s %-12s %-12s %-15s %-50s %n", 
+        treatmentID, doctorID, patientID, date, prescription);
     }
 }

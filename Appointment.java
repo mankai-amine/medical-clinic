@@ -63,11 +63,8 @@ public class Appointment {
     //toString
     @Override
     public String toString(){
-        return "appointment ID= " + appointmentID + '\'' +
-        "doctorID= " + doctorID + '\'' +
-        "patientID= " + patientID + '\'' +
-        "date= " + date + '\'' +
-        "time= " + time + '\'';
+        return String.format("%-15s %-12s %-12s %-15s %-15s %n", 
+        appointmentID, doctorID, patientID, date, time);
     }
      
  }

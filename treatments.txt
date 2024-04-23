@@ -4,5 +4,5 @@ TR003,DC001,PT004,2024-08-22,Penicillin a day during 1 week
 TR004,DC003,PT001,2024-09-22,Paracetamol 1 pill a day during 1 month
 TR005,DC004,PT002,2024-08-01,Aspirin a day during 2 weeks
 TR006,DC003,PT003,2024-08-22,2 pills of Amocelaphin  a day during 2 weeks
-TR007,DC002,PT001,2024-05-09, 2 pills of Ibuprofen daily for 2 weeks.
-TR008,DC004,PT004,2024-08-01, 2 tablets of Paracetamol twice daily for 14 days.
+TR007,DC002,PT001,2024-05-09,2 pills of Ibuprofen daily for 2 weeks.
+TR008,DC004,PT004,2024-08-01,2 tablets of Paracetamol twice daily for 14 days.
