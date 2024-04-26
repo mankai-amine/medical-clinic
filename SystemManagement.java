@@ -8,7 +8,6 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class SystemManagement {
@@ -44,7 +43,6 @@ public class SystemManagement {
 
             if (!line.isEmpty()){
                 String[] lineParts= line.split(",");
-                System.out.println(Arrays.toString(lineParts));
                 
                 firstName = lineParts[0];
                 lastName = lineParts[1];
@@ -196,34 +194,46 @@ public class SystemManagement {
     }
 
     // get the list of appointments for one particular doctor
-    public List<Appointment> getDoctorAppointments(String doctorID){
-        List<Appointment> doctorAppointments = new ArrayList<>();
-        
+    public static String viewDoctorAppointments(String doctorID){
+        // List<Appointment> doctorAppointments = new ArrayList<>();
+        String str = "";
+
         for (Appointment appointment : appointments ){
             // find the appointments that correspond to that particular doctor
             if (appointment.getDoctorID().equals(doctorID)){
                 // add the appointment to the doctor's appointments history
-                doctorAppointments.add(appointment);
+                str += appointment.toString() ;
             }
         }
         
-        return doctorAppointments;
+        return str;
+    }
+
+    // generate a new appointment ID
+    public static String generateAppointmentID (){
+        int length = appointments.size();
+        String lastAppointmentID = appointments.get(length-1).getAppointmentID();
+        int lastID = Integer.parseInt(lastAppointmentID.substring(2)) ;
+        String appointmentID = "AP" + (lastID+1);
+        return appointmentID;
     }
 
     // scheduleAppointment
-    public static void scheduleAppointment(Appointment appointment) throws IOException{
+    public static void scheduleAppointment(String doctorID, String patientID, LocalDate date, LocalTime time) throws IOException{
         // update appointments list
+        String appointmentID = generateAppointmentID();
+        Appointment appointment = new Appointment(appointmentID, doctorID, patientID, date, time);
         appointments.add(appointment);
         
         // append appointments.txt with new appointment
         try (FileWriter writer = new FileWriter(appointmentsFileName, true)) {
-            String str = String.format("%s,%s,%s,%tF,%t%n", 
-                        appointment.getAppointmentID(),
-                        appointment.getDoctorID(),
-                        appointment.getPatientID(),
-                        appointment.getDate(),
-                        appointment.getTime());
-            writer.write(str);
+            String str = String.format("%s,%s,%s,%tF,%t %n", 
+                        appointmentID,
+                        doctorID,
+                        patientID,
+                        date,
+                        time);
+            writer.write("\n" + str);
 
             System.out.println("New appointment added successfully!");
             System.out.println(appointment);
@@ -249,11 +259,11 @@ public class SystemManagement {
         try (FileWriter writer = new FileWriter(appointmentsFileName)) {
             for (int i=0; i<appointments.size();i++){
                 String str = String.format("%s,%s,%s,%tF,%t%n", 
-                appointments.get(i).getAppointmentID(),
+                appointmentID,
                 appointments.get(i).getDoctorID(),
                 appointments.get(i).getPatientID(),
-                appointments.get(i).getDate(),
-                appointments.get(i).getTime());
+                newDate,
+                newTime);
                 
                 writer.write(str);
             }
@@ -266,7 +276,7 @@ public class SystemManagement {
     // cancelAppointment
     public static void cancelAppointment(String appointmentID) throws IOException{
         
-        // update appintments list
+        // update appointments list
         int initialLength = appointments.size();
         for (int i=0; i<appointments.size(); i++){
             // find the right appointment by using appointmentID
@@ -281,7 +291,7 @@ public class SystemManagement {
         if (initialLength != appointments.size()){
             try (FileWriter writer = new FileWriter(appointmentsFileName)) {
                 for (int i=0; i<appointments.size(); i++){
-                    String str = String.format("%s,%s,%s,%tF,%t%n", 
+                    String str = String.format("%s,%s,%s,%tF,%t %n", 
                     appointments.get(i).getAppointmentID(),
                     appointments.get(i).getDoctorID(),
                     appointments.get(i).getPatientID(),
@@ -301,20 +311,31 @@ public class SystemManagement {
 
     }
 
+    // generate a new treatment ID
+    public static String generateTreatmentID (){
+        int length = treatments.size();
+        String lastTreatmentID = treatments.get(length-1).getTreatmentID();
+        int lastID = Integer.parseInt(lastTreatmentID.substring(2)) ;
+        String treatmentID = "TR" + (lastID+1);
+        return treatmentID;
+    }
+
     // provideTreatment 
-    public static void provideTreatment(Treatment treatment) throws IOException{
+    public static void provideTreatment(String doctorID, String patientID, String prescription) throws IOException {
         // update treatments list
+        String treatmentID = generateTreatmentID();
+        Treatment treatment = new Treatment(treatmentID, doctorID, patientID, LocalDate.now(), prescription);
         treatments.add(treatment);
         
         // append the treatments.txt with new treatment
         try (FileWriter writer = new FileWriter(treatmentsFileName,true)) {
-            String str = String.format("%s,%s,%s,%tF,%s",
-                        treatment.getTreatmentID(),
-                        treatment.getDoctorID(),
-                        treatment.getPatientID(),
-                        treatment.getDate(),
-                        treatment.getPrescription());
-            writer.write(str);
+            String str = String.format("%s,%s,%s,%s,%s",
+                        treatmentID,
+                        doctorID,
+                        patientID,
+                        LocalDate.now(),
+                        prescription);
+            writer.write("\n" + str );
 
             System.out.println("New treatment added successfully!");
             System.out.println(treatment);
@@ -322,23 +343,37 @@ public class SystemManagement {
         }
     }
 
+    // generate a new doctor ID
+    public static String generateDoctorID (){
+        int length = doctors.size();
+        String lastDoctorID = doctors.get(length-1).getDoctorID();
+        int lastID = Integer.parseInt(lastDoctorID.substring(2)) ;
+        String doctorID = "DC" + (lastID+1);
+        return doctorID;
+    }
+
     // registerDoctor
-    public static void registerDoctor(Doctor doctor) throws IOException{
+    public static void registerDoctor(String firstName, String lastName, LocalDate dateOfBirth, Person.Gender gender, String email, int phone, String specialty) throws IOException{
         // update doctors list
+        String doctorID = generateDoctorID();
+        int yearOfBirth = dateOfBirth.getYear();
+        int monthOfBirth = dateOfBirth.getMonthValue();
+        int dayOfBirth = dateOfBirth.getDayOfMonth();
+        Doctor doctor = new Doctor (firstName, lastName, yearOfBirth, monthOfBirth, dayOfBirth, gender, email, phone, doctorID, specialty);
         doctors.add(doctor);
         
         // append the doctors.txt with new doctor
         try (FileWriter writer = new FileWriter(doctorsFileName,true)) {
             String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s%n", 
-                        doctor.getFirstName(),
-                        doctor.getLastName(),
-                        doctor.getDateOfBirth(),
-                        doctor.getGender(),
-                        doctor.getEmail(),
-                        doctor.getPhone(),
-                        doctor.getDoctorID(),
-                        doctor.getSpecialty());
-            writer.write(str);
+                        firstName,
+                        lastName,
+                        dateOfBirth,
+                        gender,
+                        email,
+                        phone,
+                        doctorID,
+                        specialty);
+            writer.write("\n" + str);
 
             System.out.println("New doctor added successfully!");
             System.out.println(doctor);
@@ -384,9 +419,23 @@ public class SystemManagement {
         }
     }
 
+    // generate a new patient ID
+    public static String generatePatientID (){
+        int length = patients.size();
+        String lastPatientID = patients.get(length-1).getPatientID();
+        int lastID = Integer.parseInt(lastPatientID.substring(2)) ;
+        String patientID = "PT" + (lastID+1);
+        return patientID;
+    }
+
     // registerPatient
-    public static void registerPatient(Patient patient) throws IOException{
+    public static void registerPatient(String firstName, String lastName, LocalDate dateOfBirth, Person.Gender gender, String email, int phone, String insuranceCompany) throws IOException{
         //update patients list
+        String patientID = generatePatientID();
+        int yearOfBirth = dateOfBirth.getYear();
+        int monthOfBirth = dateOfBirth.getMonthValue();
+        int dayOfBirth = dateOfBirth.getDayOfMonth();
+        Patient patient = new Patient(firstName, lastName, yearOfBirth, monthOfBirth, dayOfBirth, gender, email, phone, patientID, insuranceCompany);
         patients.add(patient);
         
         // append the patient.txt with new patient

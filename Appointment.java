@@ -10,8 +10,8 @@ public class Appointment {
      private String patientID; 
      
      // constructor with parameters
-     public Appointment(String appointment, String doctorID, String patientID, LocalDate date, LocalTime time){
-         setAppointmentID(appointment);
+     public Appointment(String appointmentID, String doctorID, String patientID, LocalDate date, LocalTime time){
+         setAppointmentID(appointmentID);
          setDate(date);
          setTime(time);
          setDoctorID(doctorID);
