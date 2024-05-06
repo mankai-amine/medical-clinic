@@ -7,3 +7,4 @@ TR6,DC3,PT3,2024-08-22,2 pills of Amocelaphin  a day during 2 weeks
 TR7,DC2,PT1,2024-05-09,2 pills of Ibuprofen daily for 2 weeks
 TR8,DC4,PT4,2024-08-01,2 tablets of Paracetamol twice daily for 14 days
 TR9,DC3,PT4,2024-05-06,rest for a week
+TR10,DC1,PT4,2024-05-06,radiography of lungs 
