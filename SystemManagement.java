@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class SystemManagement {
@@ -129,6 +130,8 @@ public class SystemManagement {
 
             String line = scanner.nextLine();
             String[] lineParts= line.split(",");
+            //System.out.println(Arrays.toString(lineParts));
+
             treatmentID = lineParts[0];
             doctorID = lineParts[1];
             patientID = lineParts[2];
@@ -227,7 +230,7 @@ public class SystemManagement {
         
         // append appointments.txt with new appointment
         try (FileWriter writer = new FileWriter(appointmentsFileName, true)) {
-            String str = String.format("%s,%s,%s,%tF,%t %n", 
+            String str = String.format("%s,%s,%s,%tF,%tR", 
                         appointmentID,
                         doctorID,
                         patientID,
@@ -258,7 +261,7 @@ public class SystemManagement {
         // update appointments.txt by modifying the appointment
         try (FileWriter writer = new FileWriter(appointmentsFileName)) {
             for (int i=0; i<appointments.size();i++){
-                String str = String.format("%s,%s,%s,%tF,%t%n", 
+                String str = String.format("%s,%s,%s,%tF,%t", 
                 appointmentID,
                 appointments.get(i).getDoctorID(),
                 appointments.get(i).getPatientID(),
@@ -291,7 +294,7 @@ public class SystemManagement {
         if (initialLength != appointments.size()){
             try (FileWriter writer = new FileWriter(appointmentsFileName)) {
                 for (int i=0; i<appointments.size(); i++){
-                    String str = String.format("%s,%s,%s,%tF,%t %n", 
+                    String str = String.format("%s,%s,%s,%tF,%t", 
                     appointments.get(i).getAppointmentID(),
                     appointments.get(i).getDoctorID(),
                     appointments.get(i).getPatientID(),
@@ -364,7 +367,7 @@ public class SystemManagement {
         
         // append the doctors.txt with new doctor
         try (FileWriter writer = new FileWriter(doctorsFileName,true)) {
-            String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s%n", 
+            String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s", 
                         firstName,
                         lastName,
                         dateOfBirth,
@@ -398,7 +401,7 @@ public class SystemManagement {
         if (initialLength != doctors.size()){
             try (FileWriter writer = new FileWriter(doctorsFileName)) {
                 for (int i=0; i<appointments.size(); i++){
-                    String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s%n", 
+                    String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s", 
                     doctors.get(i).getFirstName(),
                     doctors.get(i).getLastName(),
                     doctors.get(i).getDateOfBirth(),
@@ -440,7 +443,7 @@ public class SystemManagement {
         
         // append the patient.txt with new patient
         try (FileWriter writer = new FileWriter(patientsFileName,true)) {
-            String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s%n", 
+            String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s", 
                         patient.getFirstName(),
                         patient.getLastName(),
                         patient.getDateOfBirth(),

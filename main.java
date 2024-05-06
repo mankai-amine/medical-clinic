@@ -27,7 +27,7 @@ import java.util.Scanner;
      *      - retun to the main menu
      */
 
-public class Main {
+public class main {
 
     
     public static void main(String[] args)  {
@@ -40,25 +40,30 @@ public class Main {
             e.printStackTrace();
         }
 
-        int userChoice;
+        int userChoice=0;
         Scanner scanner = new Scanner (System.in);
 
-            System.out.println("Choose your role\n 1. Patient\n 2. Doctor\n 3. Receptionist\n 4. Quit");
-            userChoice = scanner.nextInt(); 
-            
-            switch (userChoice) {
-                case 1:
-                    handlePatient(scanner);
-                    break;
-                case 2:
-                    handleDoctor(scanner);
-                case 3:
-                    //handleReceptionist();
-                case 4:
-                    //isMainMenu = false;
-                    //break;
-                default:
-                    System.out.println("Please enter a valid choice: 1, 2, 3 or 4");
+            // prompt the user to choose between different options
+            while (userChoice !=4) {
+                System.out.println("Choose your role\n 1. Patient\n 2. Doctor\n 3. Receptionist\n 4. Quit");
+                userChoice = scanner.nextInt(); 
+                
+                switch (userChoice) {
+                    case 1:
+                        handlePatient(scanner);
+                        break;
+                    case 2:
+                        handleDoctor(scanner);
+                        break;
+                    case 3:
+                        handleReceptionist(scanner);
+                        break;
+                    case 4:
+                        System.out.println("Your are exiting the program, thank you for your visit!");
+                        return;
+                    default:
+                        System.out.println("Please enter a valid choice: 1, 2, 3 or 4");
+                }                
             }
 
     } 
@@ -72,7 +77,7 @@ public class Main {
 
         boolean isPatientMenu = true;
         while (isPatientMenu){
-            System.out.println("What do you want to do? \n" +
+            System.out.println("Please choose an option \n" +
                                 " 1. view your medical history \n" +
                                 " 2. view your appointments \n" +
                                 " 3. retun to the main menu ");
@@ -97,7 +102,6 @@ public class Main {
                     System.out.println(appointmentsList);
                     break;
                 case 3:
-                    //isPatientMenu = false;
                     return;
                 default:
                     System.out.println("Please enter a valid choice: 1,2 or 3");
@@ -117,7 +121,7 @@ public class Main {
 
         boolean isDoctorMenu = true;
         while (isDoctorMenu){
-            System.out.println("What do you want to do? \n" +
+            System.out.println("Please choose an option \n" +
                                 " 1. view your appointments \n" +
                                 " 2. provide a treatemnt \n" +
                                 " 3. retun to the main menu ");
@@ -136,6 +140,7 @@ public class Main {
                 case 2:
                     System.out.println("Please enter the patient ID");
                     String patientID = scanner.next();
+                    scanner.nextLine();
                     System.out.println("Please enter the prescription");
                     String prescription = scanner.nextLine();
                     try {
@@ -146,7 +151,6 @@ public class Main {
 
                     break;
                 case 3:
-                    //isDoctorMenu = false;
                     return;
                 default:
                     System.out.println("Please enter a valid choice: 1, 2 or 3");
@@ -185,7 +189,7 @@ public class Main {
                     String dateString = scanner.next();
                     LocalDate date = LocalDate.parse(dateString);
 
-                    System.out.println("Please enter the time of the appointment");
+                    System.out.println("Please enter the time of the appointment (HH:mm)");
                     String timeString = scanner.next();
                     LocalTime time = LocalTime.parse(timeString);
             
@@ -305,7 +309,6 @@ public class Main {
                     break;
 
                 case 7:
-                    //isReceptionistMenu = false;
                     return;
                 default:
                     System.out.println("Please enter a valid choice between 1 and 7");
