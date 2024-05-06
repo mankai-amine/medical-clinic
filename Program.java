@@ -5,29 +5,29 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
-    /*
-     * When we run the program, this is what happens:
-     * 1. We load the data from the four .txt files (the four Lists are therefore initialized) 
-     * 2. in the main menu, we give the user the choice between 3 roles: patient, doctor, receptionist
-     * 3. if the user is a patient, he can:
-     *      - view his medical history (list of all his treatments)
-     *      - view all his appointments
-     *      - retun to the main menu 
-     * 4. if the user is a doctor, he can:
-     *      - view all his appointments
-     *      - provide a treatment
-     *      - retun to the main menu
-     * 5. if the user is a receptionist, he can:
-     *      - schedule an appointment
-     *      - reschedule an appointment
-     *      - cancel an appointment
-     *      - register a doctor
-     *      - remove a doctor
-     *      - register a patient
-     *      - retun to the main menu
-     */
+/*
+* When we run the program, this is what happens:
+* 1. We load the data from the four .txt files (the four Lists are therefore initialized) 
+* 2. in the main menu, we give the user the choice between 3 roles: patient, doctor, receptionist
+* 3. if the user is a patient, he can:
+*      - view his medical history (list of all his treatments)
+*      - view all his appointments
+*      - retun to the main menu 
+* 4. if the user is a doctor, he can:
+*      - view all his appointments
+*      - provide a treatment
+*      - retun to the main menu
+* 5. if the user is a receptionist, he can:
+*      - schedule an appointment
+*      - reschedule an appointment
+*      - cancel an appointment
+*      - register a doctor
+*      - remove a doctor
+*      - register a patient
+*      - retun to the main menu
+*/
 
-public class main {
+public class Program {
 
     
     public static void main(String[] args)  {
