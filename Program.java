@@ -28,7 +28,6 @@ import java.util.Scanner;
 */
 
 public class Program {
-
     
     public static void main(String[] args)  {
         // load the data of the four Lists
@@ -65,18 +64,23 @@ public class Program {
                         System.out.println("Please enter a valid choice: 1, 2, 3 or 4");
                 }                
             }
-
     } 
 
     public static void handlePatient(Scanner scanner){
         System.out.println("******* Patient menu *******");
-        System.out.println("Please enter your patient ID");
-        String patientID = scanner.next();
-        
-        // check if the patientID is valid //
 
+        // check if the patient ID is valid
+        String patientID="";
+        boolean isPatientIDValid = false;
+
+        do {
+            System.out.println("Please enter your patient ID");
+            patientID = scanner.next().toUpperCase();
+            isPatientIDValid = SystemManagement.verifyPatientID(patientID);
+        } while (!isPatientIDValid);
+        
         boolean isPatientMenu = true;
-        while (isPatientMenu){
+        while (isPatientMenu && isPatientIDValid){
             System.out.println("Please choose an option \n" +
                                 " 1. view your medical history \n" +
                                 " 2. view your appointments \n" +
@@ -107,20 +111,24 @@ public class Program {
                     System.out.println("Please enter a valid choice: 1,2 or 3");
             }
         }
-        
     }
 
 
     public static void handleDoctor(Scanner scanner){
         System.out.println("******* Doctor menu *******");
         
-        System.out.println("Please enter your doctor ID");
-        String doctorID = scanner.next();
+        // check if the doctor ID is valid
+        String doctorID="";
+        boolean isDoctorIDValid = false;
         
-        // check if the doctorID is valid //
-
+        do {
+            System.out.println("Please enter your doctor ID");
+            doctorID = scanner.next().toUpperCase();
+            isDoctorIDValid = SystemManagement.verifyDoctorID(doctorID);
+        } while (!isDoctorIDValid);
+        
         boolean isDoctorMenu = true;
-        while (isDoctorMenu){
+        while (isDoctorMenu && isDoctorIDValid){
             System.out.println("Please choose an option \n" +
                                 " 1. view your appointments \n" +
                                 " 2. provide a treatemnt \n" +
@@ -156,7 +164,6 @@ public class Program {
                     System.out.println("Please enter a valid choice: 1, 2 or 3");
             }
         }
-        
     }
 
     public static void handleReceptionist(Scanner scanner){
@@ -205,11 +212,11 @@ public class Program {
                     System.out.println("Please enter the appointment ID");
                     String appointmentID = scanner.next();
 
-                    System.out.println("Please enter the new date of the appointment");
+                    System.out.println("Please enter the new date of the appointment (YYYY-MM-DD)");
                     dateString = scanner.next();
                     date = LocalDate.parse(dateString);
 
-                    System.out.println("Please enter the new time of the appointment");
+                    System.out.println("Please enter the new time of the appointment (HH:mm)");
                     timeString = scanner.next();
                     time = LocalTime.parse(timeString);
             
@@ -314,10 +321,6 @@ public class Program {
                     System.out.println("Please enter a valid choice between 1 and 7");
             }
         }
-        
     }
-
-
-
 
 }
