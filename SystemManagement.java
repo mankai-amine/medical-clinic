@@ -8,15 +8,14 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class SystemManagement {
 
-    private static List<Doctor> doctors = new ArrayList<>();
-    private static List<Patient> patients = new ArrayList<>();
-    private static List<Appointment> appointments = new ArrayList<>();
-    private static List<Treatment> treatments = new ArrayList<>();
+    static List<Doctor> doctors = new ArrayList<>();
+    static List<Patient> patients = new ArrayList<>();
+    static List<Appointment> appointments = new ArrayList<>();
+    static List<Treatment> treatments = new ArrayList<>();
 
     private static final String doctorsFileName = "doctors.txt";
     private static final String patientsFileName = "patients.txt";
@@ -160,6 +159,39 @@ public class SystemManagement {
 
     public static List<Treatment> getAllTreatments (){
         return treatments;
+    }
+
+    // verify a patient ID
+    public static boolean verifyPatientID (String patientID){
+        for (Patient patient : patients ){
+            if (patientID.equals(patient.getPatientID())){
+                return true;
+            }
+        }
+        System.out.println("This Patient ID doesn't exist");
+        return false; 
+    }
+
+    // verify a doctor ID
+    public static boolean verifyDoctorID (String doctorID){
+        for (Doctor doctor : doctors ){
+            if (doctorID.equals(doctor.getDoctorID())){
+                return true;
+            }
+        }
+        System.out.println("This doctor ID doesn't exist");
+        return false; 
+    }
+
+    // verify an appointment ID
+    public static boolean verifyAppointmentID (String appointmentID){
+        for (Appointment appointment : appointments ){
+            if (appointmentID.equals(appointment.getAppointmentID())){
+                return true;
+            }
+        }
+        System.out.println("This appointment ID doesn't exist");
+        return false; 
     }
 
     // get the list of treatments for one particular patient 
