@@ -89,13 +89,13 @@ abstract class Person {
     //override the method toString
     @Override
     public String toString() {
-        return 
-                "firstName= " + firstName + '\'' +
-                ", lastName= " + lastName + '\'' +
-                ", dateOfBirth= " + dateOfBirth +
-                ", gender= " + gender + '\''+
-                ", email= " + email + '\'' +
-                ", phone= " + phone + '\'' ;
+        return String.format("%-10s %-10s %-12s %-10s %-20s %-15d", 
+        firstName,
+        lastName,
+        dateOfBirth,
+        gender,
+        email,
+        phone);
     }
 
 }

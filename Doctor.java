@@ -4,7 +4,7 @@ class Doctor extends Person{
     private String specialty;
   
     // Constructor with parameters
-    public Doctor(String firstName, String lastName, int yearOfBirth,int monthOfBirth, int dayOfBirth, Gender gender, String email, int phone, String doctorID, String specialty) {
+    public Doctor(String firstName, String lastName, int yearOfBirth, int monthOfBirth, int dayOfBirth, Gender gender, String email, int phone, String doctorID, String specialty) {
         super(firstName, lastName, yearOfBirth, monthOfBirth, dayOfBirth, gender, email, phone);
         setDoctorID(doctorID);
         setSpecialty(specialty);
@@ -28,11 +28,15 @@ class Doctor extends Person{
         return this.specialty;
     }
 
-        //toString
+    //toString
     @Override
     public String toString(){
-        return super.toString() + ", doctorID= " + doctorID + '\'' +
-        ", specialty= " + specialty  ;
+        return super.toString() +
+            String.format("%-10s %-20s %n", 
+            doctorID,
+            specialty); 
     }
 
 }
+
+
