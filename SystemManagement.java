@@ -39,7 +39,7 @@ public class SystemManagement {
             int yearOfBirth, monthOfBirth, dayOfBirth, phone;
             Person.Gender gender;
 
-            String line = scanner.nextLine();
+            String line = scanner.nextLine().trim();
 
             if (!line.isEmpty()){
                 String[] lineParts= line.split(",");
@@ -75,7 +75,7 @@ public class SystemManagement {
             int yearOfBirth, monthOfBirth, dayOfBirth, phone;
             Person.Gender gender;
 
-            String line = scanner.nextLine();
+            String line = scanner.nextLine().trim();
             String[] lineParts= line.split(",");
             firstName = lineParts[0];
             lastName = lineParts[1];
@@ -104,7 +104,7 @@ public class SystemManagement {
             LocalDate date;
             LocalTime time;
 
-            String line = scanner.nextLine();
+            String line = scanner.nextLine().trim();
             String[] lineParts= line.split(",");
             appointmentID = lineParts[0];
             doctorID = lineParts[1];
@@ -127,7 +127,7 @@ public class SystemManagement {
             String treatmentID, doctorID, patientID, prescription;
             LocalDate date;             
 
-            String line = scanner.nextLine();
+            String line = scanner.nextLine().trim();
             String[] lineParts= line.split(",");
             //System.out.println(Arrays.toString(lineParts));
 
@@ -262,13 +262,13 @@ public class SystemManagement {
         
         // append appointments.txt with new appointment
         try (FileWriter writer = new FileWriter(appointmentsFileName, true)) {
-            String str = String.format("%s,%s,%s,%tF,%tR", 
+            String str = String.format("%n%s,%s,%s,%tF,%tR", 
                         appointmentID,
                         doctorID,
                         patientID,
                         date,
                         time);
-            writer.write("\n" + str);
+            writer.write(str);
 
             System.out.println("New appointment added successfully!");
             System.out.println(appointment);
@@ -280,25 +280,25 @@ public class SystemManagement {
     // rescheduleAppointment
     public static void rescheduleAppointment(String appointmentID, LocalDate newDate, LocalTime newTime) throws IOException{
         // update appoinments list
-        for (int i=0; i<appointments.size(); i++){
+        for (Appointment appointment : appointments){
             // find the right appointment by using appointmentID
-            if (appointments.get(i).getAppointmentID().equals(appointmentID)){
+            if (appointment.getAppointmentID().equals(appointmentID)){
                 // replace the date and the time of the appointment
-                appointments.get(i).setDate(newDate);
-                appointments.get(i).setTime(newTime);
+                appointment.setDate(newDate);
+                appointment.setTime(newTime);
                 break;
             }
         }
 
         // update appointments.txt by modifying the appointment
         try (FileWriter writer = new FileWriter(appointmentsFileName)) {
-            for (int i=0; i<appointments.size();i++){
-                String str = String.format("%s,%s,%s,%tF,%t", 
-                appointmentID,
-                appointments.get(i).getDoctorID(),
-                appointments.get(i).getPatientID(),
-                newDate,
-                newTime);
+            for (Appointment appointment : appointments){
+                String str = String.format("%s,%s,%s,%tF,%tR%n", 
+                appointment.getAppointmentID(),
+                appointment.getDoctorID(),
+                appointment.getPatientID(),
+                appointment.getDate(),
+                appointment.getTime());
                 
                 writer.write(str);
             }
@@ -325,13 +325,13 @@ public class SystemManagement {
         // update appointments.txt by removing the appointment
         if (initialLength != appointments.size()){
             try (FileWriter writer = new FileWriter(appointmentsFileName)) {
-                for (int i=0; i<appointments.size(); i++){
-                    String str = String.format("%s,%s,%s,%tF,%t", 
-                    appointments.get(i).getAppointmentID(),
-                    appointments.get(i).getDoctorID(),
-                    appointments.get(i).getPatientID(),
-                    appointments.get(i).getDate(),
-                    appointments.get(i).getTime());
+                for (Appointment appointment : appointments){
+                    String str = String.format("%s,%s,%s,%tF,%tR%n", 
+                    appointment.getAppointmentID(),
+                    appointment.getDoctorID(),
+                    appointment.getPatientID(),
+                    appointment.getDate(),
+                    appointment.getTime());
 
                     writer.write(str);
                 }
@@ -364,13 +364,13 @@ public class SystemManagement {
         
         // append the treatments.txt with new treatment
         try (FileWriter writer = new FileWriter(treatmentsFileName,true)) {
-            String str = String.format("%s,%s,%s,%s,%s",
+            String str = String.format("%n%s,%s,%s,%s,%s",
                         treatmentID,
                         doctorID,
                         patientID,
                         LocalDate.now(),
                         prescription);
-            writer.write("\n" + str );
+            writer.write(str);
 
             System.out.println("New treatment added successfully!");
             System.out.println(treatment);
@@ -387,7 +387,8 @@ public class SystemManagement {
         return doctorID;
     }
 
-    // registerDoctor
+
+    // register a new doctor
     public static void registerDoctor(String firstName, String lastName, LocalDate dateOfBirth, Person.Gender gender, String email, int phone, String specialty) throws IOException{
         // update doctors list
         String doctorID = generateDoctorID();
@@ -399,7 +400,7 @@ public class SystemManagement {
         
         // append the doctors.txt with new doctor
         try (FileWriter writer = new FileWriter(doctorsFileName,true)) {
-            String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s", 
+            String str = String.format("%n%s,%s,%tF,%s,%s,%d,%s,%s", 
                         firstName,
                         lastName,
                         dateOfBirth,
@@ -408,7 +409,7 @@ public class SystemManagement {
                         phone,
                         doctorID,
                         specialty);
-            writer.write("\n" + str);
+            writer.write(str);
 
             System.out.println("New doctor added successfully!");
             System.out.println(doctor);
@@ -432,16 +433,16 @@ public class SystemManagement {
         // update the doctors.txt by removing the doctor
         if (initialLength != doctors.size()){
             try (FileWriter writer = new FileWriter(doctorsFileName)) {
-                for (int i=0; i<appointments.size(); i++){
-                    String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s", 
-                    doctors.get(i).getFirstName(),
-                    doctors.get(i).getLastName(),
-                    doctors.get(i).getDateOfBirth(),
-                    doctors.get(i).getGender(),
-                    doctors.get(i).getEmail(),
-                    doctors.get(i).getPhone(),
-                    doctors.get(i).getDoctorID(),
-                    doctors.get(i).getSpecialty());
+                for (Doctor doctor : doctors){
+                    String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s %n", 
+                    doctor.getFirstName(),
+                    doctor.getLastName(),
+                    doctor.getDateOfBirth(),
+                    doctor.getGender(),
+                    doctor.getEmail(),
+                    doctor.getPhone(),
+                    doctor.getDoctorID(),
+                    doctor.getSpecialty());
 
                     writer.write(str);
                 }
@@ -475,7 +476,7 @@ public class SystemManagement {
         
         // append the patient.txt with new patient
         try (FileWriter writer = new FileWriter(patientsFileName,true)) {
-            String str = String.format("%s,%s,%tF,%s,%s,%d,%s,%s", 
+            String str = String.format("%n%s,%s,%tF,%s,%s,%d,%s,%s", 
                         patient.getFirstName(),
                         patient.getLastName(),
                         patient.getDateOfBirth(),

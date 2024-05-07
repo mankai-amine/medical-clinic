@@ -30,8 +30,12 @@ class Patient extends Person{
     //toString
     @Override
     public String toString(){
-        return super.toString() + ", insurance company= " + insuranceCompany + '\'' +
-        ", patientID= " + patientID + '\'' ;
+        return super.toString() +
+            String.format("%-10s %-20s %n", 
+            patientID,
+            insuranceCompany
+            ); 
     }
+
 
 }

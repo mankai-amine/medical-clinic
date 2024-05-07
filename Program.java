@@ -171,7 +171,7 @@ public class Program {
         
         boolean isReceptionistMenu = true;
         while (isReceptionistMenu){
-            System.out.println("What do you want to do? \n" +
+            System.out.println("Please choose an option \n" +
                                 " 1. schedule an appointment \n" +
                                 " 2. reschedule an appointment \n" +
                                 " 3. cancel an appointment \n" +
@@ -259,10 +259,12 @@ public class Program {
                     String email = scanner.next();
 
                     System.out.println("Please enter the doctor's phone:");
-                    int phone = scanner.nextInt();
-
+                    int phone = Integer.parseInt(scanner.next());
+                    
+                    scanner.nextLine();
+                    
                     System.out.println("Please enter the doctor's specialty:");
-                    String specialty = scanner.next();
+                    String specialty = scanner.nextLine();
             
                     try {
                         SystemManagement.registerDoctor(firstname, lastname, dateOfBirth, gender, email, phone, specialty);
@@ -303,10 +305,12 @@ public class Program {
                     email = scanner.next();
 
                     System.out.println("Please enter the patient's phone:");
-                    phone = scanner.nextInt();
+                    phone = Integer.parseInt(scanner.next());
+
+                    scanner.nextLine();
 
                     System.out.println("Please enter the patient's insurance company:");
-                    String insuranceCompany = scanner.next();
+                    String insuranceCompany = scanner.nextLine();
             
                     try {
                         SystemManagement.registerPatient(firstname, lastname, dateOfBirth, gender, email, phone, insuranceCompany);

@@ -1,4 +1,6 @@
-Steven,Hewitt,1970-06-10,MALE,lmn@gmail.com,111111,DC1,Family medicine
-Stephanie,White,1955-11-09,FEMALE,mno@gmail.com,222222,DC2,Family medicine
-Marjorie,Davies,1969-10-18,FEMALE,nop@gmail.com,333333,DC3,Pediatrics
-Bobby,Miller,1980-02-28,MALE,opq@gmail.com,444444,DC4,Gynecology
+Steven,Hewitt,1970-06-10,MALE,lmn@gmail.com,111111,DC1,Family medicine 
+Stephanie,White,1955-11-09,FEMALE,mno@gmail.com,222222,DC2,Family medicine 
+Bobby,Miller,1980-02-28,MALE,opq@gmail.com,444444,DC4,Gynecology 
+Helen,Banes,1979-05-30,FEMALE,helen@gmail.com,562983,DC7,Allergy and immunology
+Sally,Henderson,1990-02-28,FEMALE,sally@gmail.com,963696,DC8,Pediatry
+Sam,Gibbers,1989-09-05,MALE,sam@gmail.com,145236,DC9,Allergy and immunology
