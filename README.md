@@ -1,2 +1,2 @@
 #  Medical Clinic System (MCS) 
-This is a Java Project which goal is to create Medical Clinic System (MCS) to store some information about doctors, patients, treatments, appointments, etc.
+A Java application that allows to view, create, update, and delete information about doctors, patients, treatments, and appointments.
